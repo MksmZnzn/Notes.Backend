@@ -9,15 +9,15 @@ using Notes.Application.Interfaces;
 
 namespace Notes.Application.Notes.Commands.CreateNote
 {
-    internal class CreateNoteCommandHandler
-        : IRequestHandler<CreateNotesCommand, Guid>
+    public class CreateNoteCommandHandler
+        : IRequestHandler<CreateNoteCommand, Guid>
     {
         private readonly INotesDbContext _dbContext;
 
         public CreateNoteCommandHandler(INotesDbContext dbContext) =>
             _dbContext = dbContext;
 
-        public async Task<Guid> Handle(CreateNotesCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
         {
             var note = new Note
             {
