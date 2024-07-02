@@ -3,6 +3,7 @@ using Notes.Application;
 using Notes.Application.Common.Mapping;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
+using Notes.WebAPI.Middleware;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +53,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowAll");
