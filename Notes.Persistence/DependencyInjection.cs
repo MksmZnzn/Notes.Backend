@@ -15,8 +15,7 @@ namespace Notes.Persistence
             {
                 options.UseNpgsql(connectionString);
             });
-            services.AddScoped<INotesDbContext>(provider =>
-                provider.GetService<NotesDbContext>());
+            services.AddScoped<INotesDbContext, NotesDbContext>();
             return services;
         }
     }

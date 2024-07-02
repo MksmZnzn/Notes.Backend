@@ -10,7 +10,9 @@ namespace Notes.Persistence
         public DbSet<Note> Notes {  get; set; }
 
         public NotesDbContext(DbContextOptions<NotesDbContext> options)
-            : base(options) { }
+            : base(options) 
+        { 
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
