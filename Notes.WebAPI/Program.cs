@@ -30,7 +30,19 @@ builder.Services.AddCors(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(config =>
+{
+    config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Note",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Test",
+            Email = "maximum.cad@gmail.com"
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -53,10 +65,22 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+
+app.UseSwagger();
+app.UseSwaggerUI(config =>
+{
+    config.RoutePrefix = String.Empty;
+    config.SwaggerEndpoint("swagger/v1/swagger.json", "Notes API");
+});
+
 app.UseCustomExceptionHandler();
+
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.UseCors("AllowAll");
+
 app.MapControllers();
 
 app.Run();
